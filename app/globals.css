@@ -1,64 +1,55 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-brand: #F59E0B;
-  --color-brand-light: #FCD34D;
-  --color-brand-dark: #B45309;
+  --color-arch-bg: #EEECE2;
+  --color-arch-text: #262827;
+  --color-arch-dark: #2B2626;
+  --color-arch-gray: #757776;
 }
 
 @layer utilities {
   .bg-grid-pattern {
-    background-size: 50px 50px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-image: linear-gradient(to right, rgba(38, 40, 39, 0.04) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(38, 40, 39, 0.04) 1px, transparent 1px);
   }
   
-  .text-glow {
-    text-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
+  .arch-border {
+    border-color: rgba(38, 40, 39, 0.1);
+  }
+
+  .arch-border-dark {
+    border-color: rgba(238, 236, 226, 0.1);
   }
 }
 
 body {
-  background-color: #020617; /* slate-950 */
-  color: #f8fafc; /* slate-50 */
+  background-color: var(--color-arch-bg);
+  color: var(--color-arch-text);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-/* Custom animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+/* Elegant, slow, architectural animations */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes drawLine {
+@keyframes slideIn {
   0% { transform: scaleX(0); }
   100% { transform: scaleX(1); }
 }
 
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.8; box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
-  50% { opacity: 1; box-shadow: 0 0 40px rgba(245, 158, 11, 0.6); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-draw-line {
-  transform-origin: left;
-  animation: drawLine 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
 .animate-fade-up {
   opacity: 0;
-  animation: fadeUp 1s ease-out forwards;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in {
+  transform-origin: left;
+  animation: slideIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .delay-100 { animation-delay: 100ms; }
