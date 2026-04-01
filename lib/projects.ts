@@ -8,6 +8,7 @@ export interface Project {
   type: string;
   num: string;
   images: string[];
+  video?: string;
 }
 
 export const projects: Project[] = [
@@ -121,7 +122,8 @@ export const projects: Project[] = [
       "/projects/gokdemir/WhatsApp Image 2026-03-26 at 13.55.38 (12).jpeg",
       "/projects/gokdemir/WhatsApp Image 2026-03-26 at 13.55.38 (11).jpeg",
       "/projects/gokdemir/WhatsApp Image 2026-03-26 at 13.55.38 (13).jpeg"
-    ]
+    ],
+    video: "/projects/gokdemir/GÖKDEMİR.1r.mp4"
   },
   {
     slug: "simercom",
@@ -154,7 +156,8 @@ export const projects: Project[] = [
       "/projects/mast-m/ÖMER BEY ODA 15.jpeg",
       "/projects/mast-m/A7.jpg",
       "/projects/mast-m/Y. ODASI 1.png"
-    ]
+    ],
+    video: "/projects/mast-m/M.M1.mp4"
   },
   {
     slug: "hitachi-energy",
@@ -274,7 +277,8 @@ export const projects: Project[] = [
       "/projects/karmarine/A7.jpg",
       "/projects/karmarine/a5.jpg",
       "/projects/karmarine/a4.jpg"
-    ]
+    ],
+    video: "/projects/karmarine/KARMARINE1.mp4"
   },
   {
     slug: "tavsantepe-tarakcioglu",

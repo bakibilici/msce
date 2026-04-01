@@ -15,7 +15,7 @@ export default function About() {
   const opacityHeading = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={containerRef} className="flex flex-col items-center justify-start w-full bg-[#EEECE2] font-sans pb-32">
+    <div ref={containerRef} className="flex flex-col items-center justify-start w-full bg-[#EEECE2] font-sans pb-32 pt-24">
       
       {/* Header Section */}
       <section className="relative z-10 w-full max-w-7xl mx-auto py-32 px-6 md:px-12 border-x border-[#262827]/10 pt-48 md:pt-48">

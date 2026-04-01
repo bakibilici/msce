@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="mt-auto bg-[#EEECE2] text-[#262827] px-6 py-20 z-10 relative border-t border-[var(--color-arch-dark)] border-opacity-10">
       <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8">
         <div className="md:col-span-2 flex flex-col items-start">
-          <div className="p-0 rounded-sm inline-block mb-6">
+          <div className="flex items-center gap-4 flex-row">
             <Image
               src="/mscelogo.png"
               alt="MSCE Logo"
@@ -14,8 +14,15 @@ export default function Footer() {
               height={30}
               className="object-contain h-12 w-auto mix-blend-multiply"
             />
+            <span
+              style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}
+              className={`text-lg md:text-xl font-semibold tracking-[0.15em]`}
+            >
+              MSCE
+            </span>
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-[#757776]">
+
+          <p className="max-w-md text-sm leading-relaxed text-[#757776] mt-4">
             Sürdürülebilir, güvenilir, çağdaş yaşam alanları inşa eden, endüstriyel çözümler ve yenilikçi projeler üreten öncü yapı mimarlık şirketiniz.
           </p>
         </div>

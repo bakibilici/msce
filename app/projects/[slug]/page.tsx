@@ -10,17 +10,20 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectDetail({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
   }
 
-  const nextProject = projects[(projects.indexOf(project) + 1) % projects.length];
+  const currentIndex = projects.indexOf(project);
+  const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <div className="flex flex-col items-center justify-start w-full bg-[#EEECE2] font-sans pb-32">
+    <div className="flex flex-col items-center justify-start w-full bg-[#EEECE2] font-sans pb-16 pt-24">
       {/* Hero Section */}
       <section className="relative z-10 w-full max-w-7xl mx-auto py-32 px-6 md:px-12 border-x border-[#262827]/10 pt-48 md:pt-64">
         <div className="z-10">
@@ -80,17 +83,35 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
         </StaggerContainer>
       </section>
 
-      {/* Next Project Link */}
-      <section className="relative z-20 w-full max-w-7xl mx-auto border-x border-[#262827]/10 bg-[#EEECE2]">
-        <Link 
-          href={`/projects/${nextProject.slug}`}
-          className="group flex flex-col items-center justify-center py-32 md:py-48 hover:bg-[#262827] transition-colors duration-700 relative overflow-hidden"
-        >
-          <span className="text-[10px] uppercase tracking-[0.4em] text-[#757776] group-hover:text-[#EEECE2]/60 mb-8 transition-colors z-10">Sıradaki Proje</span>
-          <h2 className="text-4xl md:text-7xl font-medium tracking-tighter text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10">{nextProject.title}</h2>
-          
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700" style={{ backgroundImage: 'linear-gradient(45deg, #EEECE2 25%, transparent 25%, transparent 75%, #EEECE2 75%, #EEECE2), linear-gradient(45deg, #EEECE2 25%, transparent 25%, transparent 75%, #EEECE2 75%, #EEECE2)', backgroundSize: '20px 20px', backgroundPosition: '0 0, 10px 10px' }}></div>
-        </Link>
+      {/* Refined Navigation */}
+      <section className="relative z-30 w-full max-w-7xl mx-auto border-x border-[#262827]/10 bg-[#EEECE2]">
+        <div className="grid grid-cols-2 divide-x divide-[#262827]/10">
+          <Link 
+            href={`/projects/${prevProject.slug}`}
+            className="group flex flex-col items-start justify-center p-8 md:p-16 hover:bg-[#262827] transition-all duration-700 relative overflow-hidden active:scale-[0.99]"
+          >
+            <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-[#757776] group-hover:text-[#EEECE2]/50 mb-4 transition-colors z-10 flex items-center gap-2">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="rotate-180">
+                <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Önceki Proje
+            </span>
+            <h4 className="text-xl md:text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10 leading-tight">{prevProject.title}</h4>
+          </Link>
+
+          <Link 
+            href={`/projects/${nextProject.slug}`}
+            className="group flex flex-col items-end justify-center p-8 md:p-16 hover:bg-[#262827] transition-all duration-700 relative overflow-hidden active:scale-[0.99] text-right"
+          >
+            <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-[#757776] group-hover:text-[#EEECE2]/50 mb-4 transition-colors z-10 flex items-center gap-2 justify-end">
+              Sıradaki Proje
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <h4 className="text-xl md:text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10 leading-tight">{nextProject.title}</h4>
+          </Link>
+        </div>
       </section>
     </div>
   );

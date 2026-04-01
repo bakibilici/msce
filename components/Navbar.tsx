@@ -10,6 +10,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const pathname = usePathname();
   const { scrollY } = useScroll();
 
@@ -32,6 +33,8 @@ export default function Navbar() {
     } else {
       setIsScrolled(false);
     }
+
+    setIsAtTop(latest <= 5);
   });
 
   const menuVariants: Variants = {
@@ -62,19 +65,38 @@ export default function Navbar() {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 z-50 w-full transition-colors duration-500 bg-[#EEECE2] ${isScrolled ? 'bg-opacity-90 backdrop-blur-md shadow-sm border-b border-[#262827]/10' : ''}`}
+        className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+          pathname === '/' && !isScrolled 
+            ? 'bg-transparent border-transparent' 
+            : 'bg-[#EEECE2] bg-opacity-90 backdrop-blur-md shadow-sm border-b border-[#262827]/10'
+        }`}
       >
         <div className="mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between px-6 md:px-12 transition-all duration-500">
-          {/* Logo Size Increased Greatly */}
-          <Link href="/" className="relative z-[60] flex items-center">
+          {/* Logo with MSCE Text */}
+          <Link href="/" className="relative z-[60] flex items-center gap-2 md:gap-4">
             <Image
               src="/mscelogo.png"
               alt="MSCE Logo"
               width={240}
               height={240}
-              className={`object-contain transition-all duration-500 ${isScrolled ? 'h-20' : 'h-20 md:h-24'} w-auto`}
+              className={`object-contain transition-all duration-500 ${isScrolled ? 'h-16 md:h-20' : 'h-20 md:h-24'} w-auto`}
               priority
             />
+            <AnimatePresence>
+              {isAtTop && (
+                <motion.span
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}
+                  className={`text-xl md:text-2xl font-semibold tracking-[0.15em] ${
+                    pathname === '/' ? 'text-[#EEECE2]' : 'text-[#262827]'
+                  }`}
+                >
+                  MSCE
+                </motion.span>
+              )}
+            </AnimatePresence>
           </Link>
 
           <button
@@ -82,15 +104,15 @@ export default function Navbar() {
             className="relative z-[60] flex h-14 w-14 flex-col items-center justify-center gap-[6px] rounded-full hover:bg-[#262827] hover:text-[#EEECE2] text-[#262827] transition-colors focus:outline-none mix-blend-difference group"
           >
             <motion.span
-              animate={isOpen ? { rotate: 45, y: 7, backgroundColor: '#EEECE2' } : { rotate: 0, y: 0, backgroundColor: 'currentColor' }}
+              animate={isOpen ? { rotate: 45, y: 7, backgroundColor: '#EEECE2' } : { rotate: 0, y: 0, backgroundColor: '#262827' }}
               className="h-[1px] w-6 bg-current block transition-colors"
             ></motion.span>
             <motion.span
-              animate={isOpen ? { opacity: 0 } : { opacity: 1, backgroundColor: 'currentColor' }}
+              animate={isOpen ? { opacity: 0 } : { opacity: 1, backgroundColor: '#262827' }}
               className="h-[1px] w-6 bg-current block transition-colors"
             ></motion.span>
             <motion.span
-              animate={isOpen ? { rotate: -45, y: -7, backgroundColor: '#EEECE2' } : { rotate: 0, y: 0, backgroundColor: 'currentColor' }}
+              animate={isOpen ? { rotate: -45, y: -7, backgroundColor: '#EEECE2' } : { rotate: 0, y: 0, backgroundColor: '#262827' }}
               className="h-[1px] w-6 bg-current block transition-colors"
             ></motion.span>
           </button>

@@ -21,6 +21,10 @@
   .arch-border-dark {
     border-color: rgba(238, 236, 226, 0.1);
   }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
 }
 
 body {
@@ -56,3 +60,15 @@ body {
 .delay-300 { animation-delay: 300ms; }
 .delay-500 { animation-delay: 500ms; }
 .delay-700 { animation-delay: 700ms; }
+
+.font-sans {
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-playfair), serif;
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat), sans-serif;
+}
