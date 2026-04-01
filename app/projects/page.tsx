@@ -3,27 +3,9 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Motion";
-
-const projects = [
-  { category: "Konut Projeleri", title: "Villa O.T.", location: "Yalova", area: "588 m²", date: "01/2025-09/2025", type: "İnşaat", num: "01" },
-  { category: "Konut Projeleri", title: "Villa G.B.", location: "İstanbul", area: "805 m²", date: "07/2024-03/2025", type: "İnşaat", num: "02" },
-  { category: "Konut Projeleri", title: "Villa A.F.", location: "İstanbul", area: "188 m²", date: "11/2024-05/2025", type: "İnşaat", num: "03" },
-  { category: "Konut Projeleri", title: "Villa B.", location: "Yalova", area: "525 m²", date: "08/2025-Devam", type: "İnşaat", num: "04" },
-
-  { category: "Karma Projeler", title: "NCT AYDINLI", location: "İstanbul", area: "4.218 m²", date: "06/2023-02/2024", type: "Cephe İşleri", num: "05" },
-  { category: "Karma Projeler", title: "SİMA LİFE KARTAL", location: "İstanbul", area: "1.050 m²", date: "07/2025-11/2025", type: "Cephe İşleri", num: "06" },
-  { category: "Karma Projeler", title: "GÖKDEMİR", location: "İstanbul", area: "945 m²", date: "09/2024-12/2024", type: "Cephe İşleri", num: "07" },
-  { category: "Karma Projeler", title: "SİMERCOM", location: "İstanbul", area: "2.264 m²", date: "10/2024-08/2025", type: "Cephe İşleri", num: "08" },
-  { category: "Karma Projeler", title: "MAST Misafirhane", location: "Balıkesir", area: "908 m²", date: "10/2024-05/2025", type: "İnşaat/Mimari", num: "09" },
-
-  { category: "Endüstriyel Projeler", title: "HITACHI ENERGY", location: "Kocaeli", area: "4.085 m²", date: "11/2024-01/2026", type: "Cephe", num: "10" },
-  { category: "Endüstriyel Projeler", title: "YMW Crane", location: "İstanbul", area: "1.450 m²", date: "08/2021-04/2023", type: "İnşaat", num: "11" },
-  { category: "Endüstriyel Projeler", title: "MAST Çiftliği", location: "Balıkesir", area: "2.055 m²", date: "04/2024-09/2024", type: "Cephe İşleri", num: "12" },
-  { category: "Endüstriyel Projeler", title: "UŞAKLIGİL Tel Çit", location: "Kocaeli", area: "750 m²", date: "10/2023-02/2024", type: "Cephe İşleri", num: "13" },
-
-  { category: "Diğer Projeler", title: "İSÜ Vadi Kampüs", location: "İstanbul", area: "3.890 m²", date: "10/2023-02/2024", type: "Cephe İşleri", num: "14" },
-  { category: "Diğer Projeler", title: "LiV HOSPITAL Ek Bina", location: "Ankara", area: "995 m²", date: "11/2023-03/2024", type: "Cephe İşleri", num: "15" },
-];
+import Link from "next/link";
+import Image from "next/image";
+import { projects } from "@/lib/projects";
 
 export default function Projects() {
   const categories = Array.from(new Set(projects.map((p) => p.category)));
@@ -68,27 +50,46 @@ export default function Projects() {
               {projects
                 .filter((p) => p.category === category)
                 .map((project, index) => (
-                  <StaggerItem key={index} className="group relative border-r border-[#262827]/10 border-b sm:border-b-0 p-8 md:p-12 hover:bg-[#e0dcd0] transition-colors flex flex-col justify-between aspect-square cursor-crosshair overflow-hidden">
-                    <span className="text-xs font-mono text-[#757776] mb-auto block z-10">{project.num} // {project.type}</span>
-                    <div className="mt-8 transition-transform group-hover:-translate-y-2 duration-500 z-10">
-                      <h3 className="text-3xl font-medium text-[#262827] mb-6 leading-tight">{project.title}</h3>
-                      <div className="grid grid-cols-2 gap-y-4 text-xs tracking-widest uppercase font-medium">
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[#757776]">Lokasyon</span>
-                          <span className="text-[#262827] truncate pr-2">{project.location}</span>
-                        </div>
-                        <div className="flex flex-col gap-1 text-right">
-                          <span className="text-[#757776]">Tarih</span>
-                          <span className="text-[#262827] truncate">{project.date}</span>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[#757776]">Alan</span>
-                          <span className="text-[#262827] truncate">{project.area}</span>
+                  <StaggerItem key={project.slug} className="border-r border-[#262827]/10 border-b">
+                    <Link 
+                      href={`/projects/${project.slug}`}
+                      className="group relative p-8 md:p-12 hover:bg-[#e0dcd0] transition-colors flex flex-col justify-between aspect-square cursor-crosshair overflow-hidden w-full h-full"
+                    >
+                      <span className="text-xs font-mono text-[#757776] mb-auto block z-10">{project.num} // {project.type}</span>
+                      <div className="mt-8 transition-all group-hover:-translate-y-2 duration-500 z-10">
+                        <h3 className="text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors mb-6 leading-tight">{project.title}</h3>
+                        <div className="grid grid-cols-2 gap-y-4 text-xs tracking-widest uppercase font-medium">
+                          <div className="flex flex-col gap-1">
+                            <span className="text-[#757776] group-hover:text-[#EEECE2]/60 transition-colors">Lokasyon</span>
+                            <span className="text-[#262827] group-hover:text-[#EEECE2] transition-colors truncate pr-2">{project.location}</span>
+                          </div>
+                          <div className="flex flex-col gap-1 text-right">
+                            <span className="text-[#757776] group-hover:text-[#EEECE2]/60 transition-colors">Tarih</span>
+                            <span className="text-[#262827] group-hover:text-[#EEECE2] transition-colors truncate">{project.date}</span>
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <span className="text-[#757776] group-hover:text-[#EEECE2]/60 transition-colors">Alan</span>
+                            <span className="text-[#262827] group-hover:text-[#EEECE2] transition-colors truncate">{project.area}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    {/* Decorative hover background pattern */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 pointer-events-none" style={{ backgroundImage: 'linear-gradient(45deg, #262827 25%, transparent 25%, transparent 75%, #262827 75%, #262827), linear-gradient(45deg, #262827 25%, transparent 25%, transparent 75%, #262827 75%, #262827)', backgroundSize: '10px 10px', backgroundPosition: '0 0, 5px 5px' }}></div>
+                      
+                      {/* Background Image on Hover */}
+                      <div className="absolute inset-0 z-0 scale-110 group-hover:scale-100 opacity-0 group-hover:opacity-40 transition-all duration-700 ease-out">
+                        {project.images[0] && (
+                          <Image
+                            src={encodeURI(project.images[0])}
+                            alt={project.title}
+                            fill
+                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#262827] to-transparent opacity-60"></div>
+                      </div>
+
+                      {/* Decorative hover background pattern */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 pointer-events-none" style={{ backgroundImage: 'linear-gradient(45deg, #262827 25%, transparent 25%, transparent 75%, #262827 75%, #262827), linear-gradient(45deg, #262827 25%, transparent 25%, transparent 75%, #262827 75%, #262827)', backgroundSize: '10px 10px', backgroundPosition: '0 0, 5px 5px' }}></div>
+                    </Link>
                   </StaggerItem>
                 ))}
             </StaggerContainer>
