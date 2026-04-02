@@ -41,7 +41,6 @@ export default function Footer() {
           <h3 className="mb-6 text-[10px] font-bold uppercase tracking-widest text-[#262827]">İletişim</h3>
           <ul className="flex flex-col gap-4 text-sm text-[#757776]">
             <li><a href="mailto:info@msce.com.tr" className="hover:text-[#262827] transition-colors">info@msce.com.tr</a></li>
-            <li><a href="tel:+905411098765" className="hover:text-[#262827] transition-colors">+90 541 109 87 65</a></li>
             <li>www.msce.com.tr</li>
           </ul>
         </div>
