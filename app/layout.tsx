@@ -26,7 +26,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "MSCE Architecture & Construction",
+  title: "MSCE",
   description: "Mimari projeleri titizlikle planlayarak, inovasyonu ve dürüstlüğü bir araya getirip, güçlü mühendislik temelleri üzerine inşa etmek.",
 };
 

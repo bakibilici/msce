@@ -12,6 +12,7 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
   const [heroVideo, setHeroVideo] = useState<string | null>(null);
 
   useEffect(() => {
@@ -136,6 +137,8 @@ export default function Home() {
               drag="x"
               dragConstraints={carouselRef}
               dragElastic={0.1}
+              onDragStart={() => { isDragging.current = true; }}
+              onDragEnd={() => { setTimeout(() => { isDragging.current = false; }, 150); }}
               className="flex gap-8 w-max pr-12"
             >
               {featuredProjects.map((project, i) => (
@@ -144,6 +147,11 @@ export default function Home() {
                   href={`/projects/${project.slug}`}
                   className="relative pointer-events-auto flex-shrink-0 w-[85vw] md:w-[45vw] aspect-[4/5] md:aspect-[16/10] group overflow-hidden bg-[#333] rounded-sm"
                   onDragStart={(e) => e.preventDefault()}
+                  onClick={(e) => {
+                    if (isDragging.current) {
+                      e.preventDefault();
+                    }
+                  }}
                 >
                   <Image
                     src={encodeURI(project.images[0])}
