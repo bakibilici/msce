@@ -31,7 +31,7 @@ export default function About() {
           <FadeIn delay={0.2}>
             <p className="mt-12 max-w-3xl text-xl leading-relaxed text-[#757776] font-light">
               2013 yılında temelleri atılan MSCE, sektörde sağlam ve kalıcı bir yer edinme vizyonuyla, 
-              2018 yılında yeniden yapılanarak yoluna daha güçlü bir adımla devam etme kararı almıştır.
+              2017 yılında yeniden yapılanarak yoluna daha güçlü bir adımla devam etme kararı almıştır.
             </p>
           </FadeIn>
         </motion.div>
@@ -46,8 +46,7 @@ export default function About() {
           </h2>
           <h3 className="text-2xl md:text-3xl font-medium mb-8 leading-tight text-[#262827]">Sektöründe Referans Alınan Bir Şirket Olmak</h3>
           <p className="text-[#757776] leading-relaxed font-light">
-            Global standartlara uygun çalışmalar gerçekleştirerek ülkemizde ve uluslararası alanda kalitesiyle tanınan,
-            güvenilirlik, şeffaflık ve çevresel duyarlılık ilkelerini ön planda tutan bir şirket olmayı hedefliyoruz.
+            Global ve yerel standartlara uygun çalışmalar gerçekleştirerek ülkemizde ve uluslararası alanlarda kalitesiyle tanınan, güvenilirlik, şeffaflık ve çevresel duyarlılık ilkelerini ön planda tutan bir şirket olarak faaliyetlerimizi sürdürüyoruz.
           </p>
         </FadeIn>
 
@@ -58,8 +57,7 @@ export default function About() {
           </h2>
           <h3 className="text-2xl md:text-3xl font-medium mb-8 leading-tight text-[#262827]">Yenilikçi ve Sürdürülebilir Çözümler</h3>
           <p className="text-[#757776] leading-relaxed font-light">
-            Mimari projeleri titizlikle planlayarak, inovasyonu ve dürüstlüğü bir araya getirip, güçlü mühendislik temelleri üzerine inşa etmek; 
-            sürdürülebilir, güvenilir, çağdaş yaşam alanları inşa etmek, endüstriyel çözümler ve yenilikçi projeler üretmektedir.
+            Fonksiyonelliği estetikle harmanlayıp güçlü bir mühendislik altyapısıyla destekleyerek, yalnızca bugünün değil geleceğin de ihtiyaçlarına cevap veren alanlar yaratmak. Bu doğrultuda, ileri teknolojiyi şeffaf iş ahlakımızla birleştiriyor; güvenli, çevreye duyarlı ve yaşam kalitesini artıran kalıcı projelere imza atıyoruz.
           </p>
         </FadeIn>
       </section>

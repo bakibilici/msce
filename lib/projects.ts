@@ -178,9 +178,9 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: "ymw-crane",
-    category: "Endüstriyel Projeler",
-    title: "YMW Crane",
+    slug: "ymv-crane",
+    category: "Endüstriyel",
+    title: "YMV Crane Fabrika",
     location: "İstanbul",
     area: "1.450 m²",
     date: "08/2021-04/2023",

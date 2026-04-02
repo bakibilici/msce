@@ -11,6 +11,7 @@ import { projects } from "@/lib/projects";
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [heroVideo, setHeroVideo] = useState<string | null>(null);
 
   useEffect(() => {
@@ -29,14 +30,6 @@ export default function Home() {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-
-  // Horizontal scroll logic
-  const { scrollYProgress: horizontalScroll } = useScroll({
-    target: horizontalRef,
-    offset: ["start end", "end start"]
-  });
-
-  const xTranslate = useTransform(horizontalScroll, [0.1, 0.9], ["0%", "-60%"]);
 
   const featuredProjects = projects.slice(0, 4);
 
@@ -104,7 +97,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="md:col-span-4 self-start sticky top-32">
             <span className="text-[10px] uppercase tracking-widest text-[#757776] font-mono">01 // Vizyon</span>
-            <PerspectiveReveal className="mt-4"><h2 className="text-3xl font-serif text-[#262827]">Düşünceden <br />Gerçeğe</h2></PerspectiveReveal>
+            <PerspectiveReveal className="mt-4"><h2 className="text-3xl font-serif text-[#262827]">Düşünceden <br />Uygulamaya</h2></PerspectiveReveal>
           </div>
           <div className="md:col-span-8">
             <TextReveal className="text-3xl md:text-5xl lg:text-6xl font-serif leading-[1.2] text-[#262827]">
@@ -128,8 +121,8 @@ export default function Home() {
       <VisionSection />
 
       {/* Horizontal Scroll Section */}
-      <section ref={horizontalRef} className="relative h-[300vh] bg-[#262827] py-0">
-        <div className="sticky top-0 h-screen flex flex-col pt-24 md:pt-32 overflow-hidden">
+      <section className="relative bg-[#262827] py-24 md:py-32 overflow-hidden">
+        <div className="flex flex-col">
           <div className="px-6 md:px-12 mb-12 max-w-7xl mx-auto w-full flex justify-between items-end">
             <div>
               <span className="text-[10px] uppercase tracking-widest text-[#EEECE2]/40 font-mono mb-4 block">02 // Portfolyo</span>
@@ -138,30 +131,35 @@ export default function Home() {
             <Link href="/projects" className="text-[10px] uppercase tracking-widest text-[#EEECE2] border-b border-[#EEECE2]/20 hover:border-[#EEECE2] transition-colors pb-1 mb-2">Tümünü Gör</Link>
           </div>
 
-          <motion.div
-            style={{ x: xTranslate }}
-            className="flex gap-8 px-6 md:px-12"
-          >
-            {featuredProjects.map((project, i) => (
-              <Link
-                key={i}
-                href={`/projects/${project.slug}`}
-                className="relative flex-shrink-0 w-[80vw] md:w-[45vw] aspect-[4/5] md:aspect-[16/10] group overflow-hidden bg-[#333]"
-              >
-                <Image
-                  src={encodeURI(project.images[0])}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
-                />
-                <div className="absolute inset-x-8 bottom-8 z-10 flex flex-col text-[#EEECE2] translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <span className="text-[10px] uppercase tracking-widest mb-2 opacity-60">{project.category}</span>
-                  <h4 className="text-2xl md:text-4xl font-serif">{project.title}</h4>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </Link>
-            ))}
-          </motion.div>
+          <div ref={carouselRef} className="overflow-hidden px-6 md:px-12 cursor-grab active:cursor-grabbing">
+            <motion.div
+              drag="x"
+              dragConstraints={carouselRef}
+              dragElastic={0.1}
+              className="flex gap-8 w-max pr-12"
+            >
+              {featuredProjects.map((project, i) => (
+                <Link
+                  key={i}
+                  href={`/projects/${project.slug}`}
+                  className="relative pointer-events-auto flex-shrink-0 w-[85vw] md:w-[45vw] aspect-[4/5] md:aspect-[16/10] group overflow-hidden bg-[#333] rounded-sm"
+                  onDragStart={(e) => e.preventDefault()}
+                >
+                  <Image
+                    src={encodeURI(project.images[0])}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 pointer-events-none"
+                  />
+                  <div className="absolute inset-x-8 bottom-8 z-10 flex flex-col text-[#EEECE2] translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
+                    <span className="text-[10px] uppercase tracking-widest mb-2 opacity-60">{project.category}</span>
+                    <h4 className="text-2xl md:text-4xl font-serif">{project.title}</h4>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                </Link>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -173,29 +171,29 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 md:gap-y-24 divide-y md:divide-y-0 md:divide-x divide-[#262827]/10">
-          <div className="group flex flex-col p-0 md:pr-12 pt-12 md:pt-0">
+          <div className="group flex flex-col h-full p-0 md:pr-12 pt-12 md:pt-0 md:pb-0">
             <span className="text-4xl font-serif text-[#262827]/20 mb-8 transition-colors group-hover:text-[#262827]">01.</span>
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Mühendislik & İnşaat</h4>
-            <p className="text-[#757776] font-light leading-relaxed mb-12">Statik hesaplardan anahtar teslim inşaat süreçlerine kadar her aşamada en yüksek kalite standartlarını ve güvenliği ön planda tutuyoruz.</p>
-            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0]">
+            <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">Statik hesaplardan anahtar teslim inşaat süreçlerine kadar her aşamada en yüksek kalite standartlarını ve güvenliği ön planda tutuyoruz.</p>
+            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0] mt-auto">
               <Image src={encodeURI(projects[1].images[0])} alt="Engineering" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
 
-          <div className="group flex flex-col p-12 md:px-12 pt-12 md:pt-0">
+          <div className="group flex flex-col h-full p-12 md:px-12 pt-12 md:pt-0 md:pb-0">
             <span className="text-4xl font-serif text-[#262827]/20 mb-8 transition-colors group-hover:text-[#262827]">02.</span>
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Mimari Tasarım</h4>
-            <p className="text-[#757776] font-light leading-relaxed mb-12">Estetiği fonksiyonla birleştirerek, mekanların ruhunu yansıtan ve kullanıcı deneyimini zenginleştiren modern yaşam alanları tasarlıyoruz.</p>
-            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0]">
+            <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">Estetiği fonksiyonla birleştirerek, mekanların ruhunu yansıtan ve kullanıcı deneyimini zenginleştiren modern yaşam alanları tasarlıyoruz.</p>
+            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0] mt-auto">
               <Image src={encodeURI(projects[0].images[2])} alt="Design" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
 
-          <div className="group flex flex-col p-12 md:pl-12 pt-12 md:pt-0">
+          <div className="group flex flex-col h-full p-12 md:pl-12 pt-12 md:pt-0 md:pb-0">
             <span className="text-4xl font-serif text-[#262827]/20 mb-8 transition-colors group-hover:text-[#262827]">03.</span>
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Proje Yönetimi</h4>
-            <p className="text-[#757776] font-light leading-relaxed mb-12">BIM teknolojilerini kullanarak maliyet, zaman ve kaynak yönetimini optimize ediyor, projelerinizi sıfır hata hedefiyle takip ediyoruz.</p>
-            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0]">
+            <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">BIM teknolojilerini kullanarak maliyet, zaman ve kaynak yönetimini optimize ediyor, projelerinizi sıfır hata hedefiyle takip ediyoruz.</p>
+            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0] mt-auto">
               <Image src={encodeURI(projects[2].images[0])} alt="BIM" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
@@ -205,7 +203,7 @@ export default function Home() {
       {/* Call to Action */}
       <section className="relative py-16 md:py-32 px-6 md:px-12 border-t border-[#262827]/10 bg-[#262827]">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
-          <h3 className="text-5xl md:text-8xl font-serif text-[#EEECE2] mb-12 leading-tight">Bir Sonraki Projenizi <br />Birlikte Kuralım</h3>
+          <h3 className="text-4xl md:text-6xl font-serif text-[#EEECE2] mb-12 leading-tight">Bir Sonraki Projenizi <br />Birlikte Planlayalım.</h3>
           <Link href="/contact" className="px-12 py-5 rounded-full border border-[#EEECE2]/20 text-[#EEECE2] hover:bg-[#EEECE2] hover:text-[#262827] transition-all duration-500 font-medium tracking-widest uppercase text-xs">İletişime Geçin</Link>
         </div>
       </section>
@@ -221,10 +219,11 @@ function VisionSection() {
     offset: ["start start", "end end"]
   });
 
-  // Background animations: grayscale to color, subtle zoom, and overlay fade
+  // Background animations: grayscale to color, faster zoom, and overlay fade
   const grayscaleValue = useTransform(scrollYProgress, [0, 0.4], [100, 0]);
   const filter = useMotionTemplate`grayscale(${grayscaleValue}%)`;
-  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1]); // Increased scale for faster movement
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]); // Added parallax Y
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.5, 0.2, 0.2, 0.6]);
 
   // Text layer animations
@@ -242,8 +241,8 @@ function VisionSection() {
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         {/* Background Image with Filter */}
         <motion.div
-          style={{ filter, scale }}
-          className="absolute inset-0 w-full h-full"
+          style={{ filter, scale, y: bgY }}
+          className="absolute inset-0 w-full h-[120%] -top-[10%]"
         >
           <Image
             src={encodeURI(projects[3].images[1])}

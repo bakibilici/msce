@@ -35,8 +35,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="text-5xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-[1] mb-16 text-[#262827]">
-              {project.title}
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-[1] mb-16 text-[#262827] capitalize">
+              {project.title.toLowerCase()}
             </h1>
           </FadeIn>
         </div>
@@ -96,7 +96,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               </svg>
               Önceki Proje
             </span>
-            <h4 className="text-xl md:text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10 leading-tight">{prevProject.title}</h4>
+            <h4 className="text-xl md:text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10 leading-tight capitalize">{prevProject.title.toLowerCase()}</h4>
           </Link>
 
           <Link 
@@ -109,7 +109,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </span>
-            <h4 className="text-xl md:text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10 leading-tight">{nextProject.title}</h4>
+            <h4 className="text-xl md:text-3xl font-medium text-[#262827] group-hover:text-[#EEECE2] transition-colors z-10 leading-tight capitalize">{nextProject.title.toLowerCase()}</h4>
           </Link>
         </div>
       </section>

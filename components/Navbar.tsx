@@ -65,11 +65,10 @@ export default function Navbar() {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 z-50 w-full transition-all duration-500 ${
-          pathname === '/' && !isScrolled 
-            ? 'bg-transparent border-transparent' 
+        className={`fixed top-0 z-50 w-full transition-all duration-500 ${pathname === '/' && !isScrolled
+            ? 'bg-transparent border-transparent'
             : 'bg-[#EEECE2] bg-opacity-90 backdrop-blur-md shadow-sm border-b border-[#262827]/10'
-        }`}
+          }`}
       >
         <div className="mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between px-6 md:px-12 transition-all duration-500">
           {/* Logo with MSCE Text */}
@@ -89,9 +88,8 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -10 }}
                   style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}
-                  className={`text-xl md:text-2xl font-semibold tracking-[0.15em] ${
-                    pathname === '/' ? 'text-[#EEECE2]' : 'text-[#262827]'
-                  }`}
+                  className={`text-3xl md:text-5xl font-semibold tracking-[0.15em] ${pathname === '/' ? 'text-[#EEECE2]' : 'text-[#262827]'
+                    }`}
                 >
                   MSCE
                 </motion.span>
@@ -130,7 +128,7 @@ export default function Navbar() {
           >
             <div className="max-w-7xl mx-auto w-full flex flex-col items-start gap-4">
               {navLinks.map((link, i) => (
-                <div key={link.title} className="overflow-hidden">
+                <div key={link.title} className="overflow-hidden pt-1 pb-3 -my-3">
                   <motion.div
                     initial={{ y: '100%' }}
                     animate={{ y: 0 }}
@@ -139,7 +137,7 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      className="text-5xl md:text-8xl font-medium tracking-tighter text-[#EEECE2] hover:text-[#757776] transition-colors inline-block pb-2"
+                      className="text-5xl md:text-8xl font-medium font-serif tracking-tighter text-[#EEECE2] hover:text-[#757776] transition-colors inline-block leading-[0.9]"
                     >
                       {link.title}
                     </Link>
@@ -160,7 +158,6 @@ export default function Navbar() {
                 <div className="flex flex-col">
                   <span>İletişim</span>
                   <a href="mailto:info@msce.com.tr" className="text-[#EEECE2] mt-2 hover:underline">info@msce.com.tr</a>
-                  <a href="tel:+905411098765" className="text-[#EEECE2] hover:underline">+90 541 109 87 65</a>
                 </div>
               </motion.div>
             </div>

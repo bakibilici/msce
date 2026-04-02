@@ -11,20 +11,10 @@ const partners = [
   "NEVADA İNŞAAT / Malzeme Tedarik",
   "YALOVA MÜHENDİSLİK / Projelendirme Çalışması",
   "ONAR TEKNİK / İklimlendirme İşleri",
-  "İZOBAL / İzolasyon İşleri",
-  "TERCİH MÜHENDİSLİK / Alüminyum & Çelik İşleri",
   "BUDAKSAN / Çelik İşleri",
-  "GRB MÜHENDİSLİK / Malzeme Tedarik",
   "ÖNCÜ E.M. / Malzeme Tedarik",
-  "İNCEBİZ / Hafriyat İşleri",
-  "HACIOĞULLARI / Malzeme Tedarik",
   "GİF MÜHENDİSLİK / Ölçüm İşleri",
-  "POLAT METAL / Malzeme Tedarik",
-  "GÜREWİN YAPI / Malzeme Tedarik",
-  "SANTEK / Malzeme Tedarik",
-  "FGİ / Malzeme Tedarik",
   "HEMAR MAKİNA / Malzeme Tedarik",
-  "ALBAYRAK D.Ç. / Malzeme Tedarik",
 ];
 
 export default function Contact() {
@@ -67,10 +57,7 @@ export default function Contact() {
                 <span className="text-[10px] uppercase tracking-[0.3em] text-[#757776] mb-2 font-medium">E-posta</span>
                 <a href="mailto:info@msce.com.tr" className="text-2xl hover:text-[#757776] transition-colors border-b border-transparent hover:border-[#262827]/10 w-max text-[#262827]">info@msce.com.tr</a>
               </StaggerItem>
-              <StaggerItem className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#757776] mb-2 font-medium">Telefon</span>
-                <a href="tel:+905411098765" className="text-2xl hover:text-[#757776] transition-colors border-b border-transparent hover:border-[#262827]/10 w-max text-[#262827]">+90 541 109 87 65</a>
-              </StaggerItem>
+
               <StaggerItem className="flex flex-col">
                 <span className="text-[10px] uppercase tracking-[0.3em] text-[#757776] mb-2 font-medium">Web</span>
                 <a href="https://www.msce.com.tr" className="text-2xl hover:text-[#757776] transition-colors border-b border-transparent hover:border-[#262827]/10 w-max text-[#262827]">www.msce.com.tr</a>
