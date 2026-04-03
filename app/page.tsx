@@ -145,7 +145,7 @@ export default function Home() {
                 <Link
                   key={i}
                   href={`/projects/${project.slug}`}
-                  className="relative pointer-events-auto flex-shrink-0 w-[85vw] md:w-[45vw] aspect-[4/5] md:aspect-[16/10] group overflow-hidden bg-[#333] rounded-sm"
+                  className="relative pointer-events-auto flex-shrink-0 w-[65vw] md:w-[45vw] aspect-[4/5] md:aspect-[16/10] group overflow-hidden bg-[#333] rounded-sm"
                   onDragStart={(e) => e.preventDefault()}
                   onClick={(e) => {
                     if (isDragging.current) {
@@ -161,7 +161,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-x-8 bottom-8 z-10 flex flex-col text-[#EEECE2] translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
                     <span className="text-[10px] uppercase tracking-widest mb-2 opacity-60">{project.category}</span>
-                    <h4 className="text-2xl md:text-4xl font-serif">{project.title}</h4>
+                    <h4 className="text-xl md:text-4xl font-serif">{project.title}</h4>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                 </Link>
@@ -179,30 +179,30 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 md:gap-y-24 divide-y md:divide-y-0 md:divide-x divide-[#262827]/10">
-          <div className="group flex flex-col h-full p-0 md:pr-12 pt-12 md:pt-0 md:pb-0">
+          <div className="group flex flex-col h-full py-12 md:py-0 p-0 md:pr-12 md:pb-0">
             <span className="text-4xl font-serif text-[#262827]/20 mb-8 transition-colors group-hover:text-[#262827]">01.</span>
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Mühendislik & İnşaat</h4>
             <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">Statik hesaplardan anahtar teslim inşaat süreçlerine kadar her aşamada en yüksek kalite standartlarını ve güvenliği ön planda tutuyoruz.</p>
-            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0] mt-auto">
-              <Image src={encodeURI(projects[1].images[0])} alt="Engineering" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+            <div className="w-full h-48 md:h-64 relative overflow-hidden bg-[#e0dcd0] mt-auto">
+              <Image src="/home_engineering.png" alt="Engineering" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
 
-          <div className="group flex flex-col h-full p-12 md:px-12 pt-12 md:pt-0 md:pb-0">
+          <div className="group flex flex-col h-full py-12 md:py-0 p-0 md:px-12 md:pb-0">
             <span className="text-4xl font-serif text-[#262827]/20 mb-8 transition-colors group-hover:text-[#262827]">02.</span>
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Mimari Tasarım</h4>
             <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">Estetiği fonksiyonla birleştirerek, mekanların ruhunu yansıtan ve kullanıcı deneyimini zenginleştiren modern yaşam alanları tasarlıyoruz.</p>
-            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0] mt-auto">
-              <Image src={encodeURI(projects[0].images[2])} alt="Design" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+            <div className="w-full h-48 md:h-64 relative overflow-hidden bg-[#e0dcd0] mt-auto">
+              <Image src="/home_design.png" alt="Design" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
 
-          <div className="group flex flex-col h-full p-12 md:pl-12 pt-12 md:pt-0 md:pb-0">
+          <div className="group flex flex-col h-full py-12 md:py-0 p-0 md:pl-12 md:pb-0">
             <span className="text-4xl font-serif text-[#262827]/20 mb-8 transition-colors group-hover:text-[#262827]">03.</span>
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Proje Yönetimi</h4>
             <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">BIM teknolojilerini kullanarak maliyet, zaman ve kaynak yönetimini optimize ediyor, projelerinizi sıfır hata hedefiyle takip ediyoruz.</p>
-            <div className="w-full h-48 relative overflow-hidden bg-[#e0dcd0] mt-auto">
-              <Image src={encodeURI(projects[2].images[0])} alt="BIM" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+            <div className="w-full h-48 md:h-64 relative overflow-hidden bg-[#e0dcd0] mt-auto flex items-center justify-center p-4">
+              <Image src="/LOD100500.png" alt="BIM" width={400} height={200} className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700 mix-blend-multiply" />
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@ function VisionSection() {
           {/* Layer 1: Top Left */}
           <motion.div
             style={{ opacity: text1Opacity, y: text1Y }}
-            className="absolute top-[20%] left-[10%] max-w-md"
+            className="absolute top-[10%] md:top-[20%] left-6 md:left-[10%] max-w-[85vw] md:max-w-md"
           >
             <span className="text-arch-bg/40 font-mono text-[10px] uppercase tracking-[0.3em] mb-4 block">Vizyonumuz</span>
             <PerspectiveReveal className="text-3xl md:text-5xl font-serif text-arch-bg leading-tight">
@@ -283,7 +283,7 @@ function VisionSection() {
           {/* Layer 2: Center Right */}
           <motion.div
             style={{ opacity: text2Opacity, y: text2Y }}
-            className="absolute top-[45%] right-[10%] text-right max-w-md"
+            className="absolute top-[40%] md:top-[45%] right-6 md:right-[10%] text-right max-w-[85vw] md:max-w-md"
           >
             <span className="text-arch-bg/40 font-mono text-[10px] uppercase tracking-[0.3em] mb-4 block">Felsefe</span>
             <BlurReveal className="text-3xl md:text-5xl font-serif text-arch-bg leading-tight">
@@ -294,9 +294,9 @@ function VisionSection() {
           {/* Layer 3: Bottom Center */}
           <motion.div
             style={{ opacity: text3Opacity, y: text3Y }}
-            className="absolute bottom-[20%] text-center max-w-2xl px-6"
+            className="absolute bottom-[10%] md:bottom-[20%] text-center max-w-[90vw] md:max-w-2xl px-6"
           >
-            <h2 className="text-4xl md:text-7xl font-serif text-arch-bg leading-tight mb-8">
+            <h2 className="text-3xl md:text-7xl font-serif text-arch-bg leading-tight mb-8">
               Geleceğin Mimarisini <br className="hidden md:block" /> Bugün İnşa Ediyoruz
             </h2>
             <div className="h-px w-24 bg-arch-bg/30 mx-auto"></div>

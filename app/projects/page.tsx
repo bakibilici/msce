@@ -65,6 +65,8 @@ export default function Projects() {
                             muted
                             loop
                             playsInline
+                            preload="auto"
+                            poster={encodeURI(project.images[0])}
                             className="h-full w-full object-cover"
                           />
                         ) : project.images[0] ? (
@@ -81,10 +83,17 @@ export default function Projects() {
                         </div>
                       </div>
 
-                      {/* Default Info (Visible) */}
-                      <div className="relative z-10 p-4 md:p-6 transition-opacity duration-500 group-hover:opacity-0 pointer-events-none">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#262827] bg-[#EEECE2]/80 px-2 py-1 mb-4 inline-block">#{project.num}</span>
-                        <h3 className="text-3xl font-medium text-[#262827] leading-tight bg-[#EEECE2]/80 px-2 py-1 w-fit capitalize">{project.title.toLowerCase()}</h3>
+                      {/* Default Info (Visible a.k.a Pre-Hover) */}
+                      <div className="absolute inset-x-4 bottom-4 md:inset-x-6 md:bottom-6 z-10 p-6 md:p-8 flex flex-col justify-end transition-opacity duration-700 group-hover:opacity-0 pointer-events-none overflow-hidden rounded-b-sm">
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#262827]/90 via-[#262827]/40 to-transparent"></div>
+                        <div className="relative z-20 translate-y-0 group-hover:translate-y-4 transition-transform duration-700">
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-[#EEECE2]/80">#{project.num}</span>
+                            <div className="h-[1px] w-6 bg-[#EEECE2]/30"></div>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-[#EEECE2]/80">{project.category}</span>
+                          </div>
+                          <h3 className="text-3xl md:text-4xl font-serif text-[#EEECE2] leading-[1.1] capitalize tracking-tight">{project.title.toLowerCase()}</h3>
+                        </div>
                       </div>
 
                       {/* Hover Info (Hidden by default) */}

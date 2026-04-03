@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Motion";
+import ProjectGallery from "@/components/ProjectGallery";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -64,23 +65,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Image Gallery */}
+      {/* Interactive Image Gallery */}
       <section className="relative z-20 w-full max-w-7xl mx-auto border-x border-b border-[#262827]/10 bg-[#EEECE2] p-6 md:p-12">
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-          {project.images.map((img, i) => (
-            <StaggerItem key={i} className={`overflow-hidden bg-[#e0dcd0] group relative ${i % 3 === 0 ? 'md:col-span-2' : ''}`}>
-              <div className="aspect-[16/9] w-full relative overflow-hidden group-hover:scale-105 transition-transform duration-1000 ease-out">
-                 <Image
-                  src={encodeURI(img)}
-                  alt={`${project.title} - ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <ProjectGallery images={project.images} title={project.title} />
       </section>
 
       {/* Refined Navigation */}

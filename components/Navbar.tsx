@@ -66,8 +66,8 @@ export default function Navbar() {
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 z-50 w-full transition-all duration-500 ${pathname === '/' && !isScrolled
-            ? 'bg-transparent border-transparent'
-            : 'bg-[#EEECE2] bg-opacity-90 backdrop-blur-md shadow-sm border-b border-[#262827]/10'
+          ? 'bg-transparent border-transparent'
+          : 'bg-[#EEECE2] bg-opacity-90 backdrop-blur-md shadow-sm border-b border-[#262827]/10'
           }`}
       >
         <div className="mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between px-6 md:px-12 transition-all duration-500">
@@ -137,7 +137,7 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      className="text-5xl md:text-8xl font-medium font-serif tracking-tighter text-[#EEECE2] hover:text-[#757776] transition-colors inline-block leading-[0.9]"
+                      className="text-5xl md:text-8xl font-medium font-montserrat tracking-tighter text-[#EEECE2] hover:text-[#757776] transition-colors inline-block leading-[0.9]"
                     >
                       {link.title}
                     </Link>

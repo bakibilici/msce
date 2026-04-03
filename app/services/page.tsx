@@ -87,7 +87,7 @@ export default function Services() {
         {/* BIM Süreci */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start pt-32 border-t border-[#262827]/10">
           <FadeIn className="order-2 lg:order-1 w-full group overflow-hidden rounded-sm flex items-center justify-center">
-            <Image src="/LOD100500.jpeg" alt="BIM LOD 100-500 Model" width={800} height={500} className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" />
+            <Image src="/LOD100500.png" alt="BIM LOD 100-500 Model" width={800} height={500} className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" />
           </FadeIn>
           <FadeIn delay={0.2} className="order-1 lg:order-2">
             <h2 className="text-[10px] md:text-xs tracking-[0.3em] text-[#757776] uppercase mb-4">03.</h2>

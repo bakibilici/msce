@@ -105,7 +105,10 @@ export const projects: Project[] = [
     images: [
       "/projects/sima-life/BBB.jpg",
       "/projects/sima-life/B4.jpg",
-      "/projects/sima-life/B1.jpg"
+      "/projects/sima-life/B1.jpg",
+      "/projects/sima-life/WhatsApp Image 2026-04-03 at 12.44.30.jpeg",
+      "/projects/sima-life/WhatsApp Image 2026-04-03 at 12.44.30 (1).jpeg",
+      "/projects/sima-life/WhatsApp Image 2026-04-03 at 12.44.30 (2).jpeg"
     ]
   },
   {
@@ -179,7 +182,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ymv-crane",
-    category: "Endüstriyel",
+    category: "Endüstriyel Projeler",
     title: "YMV Crane Fabrika",
     location: "İstanbul",
     area: "1.450 m²",
