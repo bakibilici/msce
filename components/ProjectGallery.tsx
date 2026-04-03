@@ -7,6 +7,12 @@ import { StaggerContainer, StaggerItem } from "@/components/Motion";
 
 export default function ProjectGallery({ images, title }: { images: string[], title: string }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
+  // Reset loading state when image index changes
+  useEffect(() => {
+    setIsImageLoading(true);
+  }, [selectedIndex]);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -123,14 +129,20 @@ export default function ProjectGallery({ images, title }: { images: string[], ti
               className="relative w-full max-w-7xl h-[80vh] flex items-center justify-center p-4 md:p-8 outline-none"
               onClick={(e) => e.stopPropagation()}
             >
+              {isImageLoading && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
+                  <div className="w-8 h-8 md:w-12 md:h-12 border-2 border-[rgba(238,236,226,0.2)] border-t-[#EEECE2] rounded-full animate-spin"></div>
+                </div>
+              )}
               <Image
                 src={encodeURI(images[selectedIndex])}
                 alt={`${title} - Gallery Image ${selectedIndex + 1}`}
                 fill
-                className="object-contain"
+                className={`object-contain transition-opacity duration-500 ease-in-out ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
                 sizes="100vw"
                 quality={100}
                 priority
+                onLoad={() => setIsImageLoading(false)}
               />
               {/* Pagination */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 font-mono text-xs tracking-widest bg-black/40 px-6 py-2 rounded-full backdrop-blur-md">
