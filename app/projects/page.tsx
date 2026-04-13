@@ -51,35 +51,35 @@ export default function Projects() {
                 .filter((p) => p.category === category)
                 .map((project, index) => (
                   <StaggerItem key={project.slug} className="border-r border-[#262827]/10 border-b relative">
-                    <Link 
+                    <Link
                       href={`/projects/${project.slug}`}
                       className="group flex flex-col justify-end aspect-square w-full h-full bg-[#EEECE2] p-4 md:p-6 cursor-pointer"
                     >
                       {/* Media Layer with Frame */}
                       <div className="absolute top-4 left-4 right-4 bottom-4 md:top-6 md:left-6 md:right-6 md:bottom-6 z-0 overflow-hidden rounded-sm transition-transform duration-1000 group-hover:scale-[0.98]">
                         <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-110">
-                        {project.video ? (
-                          <video 
-                            src={encodeURI(project.video)}
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            preload="auto"
-                            poster={encodeURI(project.images[0])}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : project.images[0] ? (
-                          <Image
-                            src={encodeURI(project.images[0])}
-                            alt={project.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                        ) : null}
-                        {/* Overlay Gradient */}
-                        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/50 transition-colors duration-500"></div>
+                          {project.video ? (
+                            <video
+                              src={encodeURI(project.video)}
+                              autoPlay={true}
+                              muted={true}
+                              loop={true}
+                              playsInline={true}
+                              preload="auto"
+                              poster={encodeURI(project.images[0])}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : project.images[0] ? (
+                            <Image
+                              src={encodeURI(project.images[0])}
+                              alt={project.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
+                          ) : null}
+                          {/* Overlay Gradient */}
+                          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/50 transition-colors duration-500"></div>
                         </div>
                       </div>
 
@@ -102,11 +102,11 @@ export default function Projects() {
                           <span className="text-xs font-mono uppercase tracking-widest">{project.num} // {project.type}</span>
                           <div className="w-12 h-12 rounded-full border border-[#EEECE2]/20 flex items-center justify-center group-hover:rotate-45 transition-transform duration-700">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                           </div>
                         </div>
-                        
+
                         <div>
                           <h3 className="text-3xl md:text-4xl font-medium mb-6 leading-tight tracking-tighter capitalize">{project.title.toLowerCase()}</h3>
                           <div className="flex flex-wrap gap-x-12 gap-y-4 text-[10px] uppercase tracking-[0.2em] font-medium opacity-80">
@@ -129,7 +129,7 @@ export default function Projects() {
                       {/* Hover Indicator Icon */}
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-white">
-                          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
                     </Link>

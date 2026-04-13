@@ -45,11 +45,12 @@ export default function Home() {
         >
           {heroVideo ? (
             <video
-              src={heroVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
+              src={encodeURI(heroVideo)}
+              autoPlay={true}
+              muted={true}
+              loop={true}
+              playsInline={true}
+              preload="auto"
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
           ) : (
@@ -184,7 +185,7 @@ export default function Home() {
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Mühendislik & İnşaat</h4>
             <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">Statik hesaplardan anahtar teslim inşaat süreçlerine kadar her aşamada en yüksek kalite standartlarını ve güvenliği ön planda tutuyoruz.</p>
             <div className="w-full h-48 md:h-64 relative overflow-hidden bg-[#e0dcd0] mt-auto">
-              <Image src="/home_engineering.png" alt="Engineering" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+              <Image src="/home_engineering.png" alt="Engineering" fill className="object-cover transition-all duration-700" />
             </div>
           </div>
 
@@ -193,7 +194,7 @@ export default function Home() {
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Mimari Tasarım</h4>
             <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">Estetiği fonksiyonla birleştirerek, mekanların ruhunu yansıtan ve kullanıcı deneyimini zenginleştiren modern yaşam alanları tasarlıyoruz.</p>
             <div className="w-full h-48 md:h-64 relative overflow-hidden bg-[#e0dcd0] mt-auto">
-              <Image src="/home_design.png" alt="Design" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+              <Image src="/home_design.png" alt="Design" fill className="object-cover transition-all duration-700" />
             </div>
           </div>
 
@@ -202,7 +203,7 @@ export default function Home() {
             <h4 className="text-2xl font-serif mb-6 text-[#262827]">Proje Yönetimi</h4>
             <p className="text-[#757776] font-light leading-relaxed mb-12 flex-grow">BIM teknolojilerini kullanarak maliyet, zaman ve kaynak yönetimini optimize ediyor, projelerinizi sıfır hata hedefiyle takip ediyoruz.</p>
             <div className="w-full h-48 md:h-64 relative overflow-hidden bg-[#e0dcd0] mt-auto flex items-center justify-center p-4">
-              <Image src="/LOD100500.png" alt="BIM" width={400} height={200} className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700 mix-blend-multiply" />
+              <Image src="/LOD100500.png" alt="BIM" fill className="object-cover transition-all duration-700" />
             </div>
           </div>
         </div>
@@ -227,84 +228,102 @@ function VisionSection() {
     offset: ["start start", "end end"]
   });
 
-  // Background animations: grayscale to color, faster zoom, and overlay fade
-  const grayscaleValue = useTransform(scrollYProgress, [0, 0.4], [100, 0]);
-  const filter = useMotionTemplate`grayscale(${grayscaleValue}%)`;
-  const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1]); // Increased scale for faster movement
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]); // Added parallax Y
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.5, 0.2, 0.2, 0.6]);
-
-  // Text layer animations
-  const text1Opacity = useTransform(scrollYProgress, [0.1, 0.2, 0.3, 0.4], [0, 1, 1, 0]);
-  const text1Y = useTransform(scrollYProgress, [0.1, 0.4], [30, -30]);
-
-  const text2Opacity = useTransform(scrollYProgress, [0.4, 0.5, 0.6, 0.7], [0, 1, 1, 0]);
-  const text2Y = useTransform(scrollYProgress, [0.4, 0.7], [30, -30]);
-
-  const text3Opacity = useTransform(scrollYProgress, [0.7, 0.8, 0.95], [0, 1, 1]);
-  const text3Y = useTransform(scrollYProgress, [0.7, 0.95], [30, 0]);
+  const cards = [
+    { title: "Yenilikçi Perspektif,\nModern Estetik.", subtitle: "VİZYONUMUZ", src: encodeURI(projects[3].images[1]) },
+    { title: "Detayda Gizli\nMükemmellik.", subtitle: "FELSEFE", src: encodeURI(projects[1].images[1]) },
+    { title: "Geleceğin Mimarisini\nBugün İnşa Ediyoruz", subtitle: "MİSYON", src: encodeURI(projects[5].images[0]) },
+  ];
 
   return (
-    <section ref={ref} className="relative h-[300vh] w-full bg-[#262827]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* Background Image with Filter */}
-        <motion.div
-          style={{ filter, scale, y: bgY }}
-          className="absolute inset-0 w-full h-[120%] -top-[10%]"
-        >
+    <>
+      {/* MOBILE VERSION: Static layout without animations for smooth scrolling ("kaydır geç") */}
+      <section className="relative w-full min-h-[90vh] flex flex-col justify-center py-32 px-6 md:hidden bg-[#262827] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 w-full h-full z-0">
           <Image
             src={encodeURI(projects[3].images[1])}
             alt="Architectural Vision"
             fill
-            className="object-cover"
+            className="object-cover grayscale"
           />
-        </motion.div>
+        </div>
+        
+        {/* Gradient Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#262827]/90 via-[#262827]/60 to-[#262827]/90 z-0"></div>
 
-        {/* Dynamic Overlay */}
-        <motion.div
-          style={{ opacity: overlayOpacity }}
-          className="absolute inset-0 bg-black z-0"
-        ></motion.div>
+        {/* Content Stack */}
+        <div className="relative z-10 w-full h-full flex flex-col items-center justify-between gap-16 text-center">
+          
+          <div className="flex flex-col items-center">
+            <span className="text-[#EEECE2]/50 font-mono text-[10px] uppercase tracking-[0.3em] mb-4 block">Vizyonumuz</span>
+            <h3 className="text-3xl font-serif text-[#EEECE2] leading-snug">
+              Yenilikçi Perspektif, <br/> Modern Estetik.
+            </h3>
+          </div>
 
-        {/* Storytelling Layers */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col items-center justify-center pointer-events-none">
+          <div className="flex flex-col items-center">
+            <span className="text-[#EEECE2]/50 font-mono text-[10px] uppercase tracking-[0.3em] mb-4 block">Felsefe</span>
+            <h3 className="text-3xl font-serif text-[#EEECE2] leading-snug">
+              Detayda Gizli <br/> Mükemmellik.
+            </h3>
+          </div>
 
-          {/* Layer 1: Top Left */}
-          <motion.div
-            style={{ opacity: text1Opacity, y: text1Y }}
-            className="absolute top-[10%] md:top-[20%] left-6 md:left-[10%] max-w-[85vw] md:max-w-md"
-          >
-            <span className="text-arch-bg/40 font-mono text-[10px] uppercase tracking-[0.3em] mb-4 block">Vizyonumuz</span>
-            <PerspectiveReveal className="text-3xl md:text-5xl font-serif text-arch-bg leading-tight">
-              Yenilikçi Perspektif, Modern Estetik.
-            </PerspectiveReveal>
-          </motion.div>
-
-          {/* Layer 2: Center Right */}
-          <motion.div
-            style={{ opacity: text2Opacity, y: text2Y }}
-            className="absolute top-[40%] md:top-[45%] right-6 md:right-[10%] text-right max-w-[85vw] md:max-w-md"
-          >
-            <span className="text-arch-bg/40 font-mono text-[10px] uppercase tracking-[0.3em] mb-4 block">Felsefe</span>
-            <BlurReveal className="text-3xl md:text-5xl font-serif text-arch-bg leading-tight">
-              Detayda Gizli Mükemmellik.
-            </BlurReveal>
-          </motion.div>
-
-          {/* Layer 3: Bottom Center */}
-          <motion.div
-            style={{ opacity: text3Opacity, y: text3Y }}
-            className="absolute bottom-[10%] md:bottom-[20%] text-center max-w-[90vw] md:max-w-2xl px-6"
-          >
-            <h2 className="text-3xl md:text-7xl font-serif text-arch-bg leading-tight mb-8">
-              Geleceğin Mimarisini <br className="hidden md:block" /> Bugün İnşa Ediyoruz
+          <div className="flex flex-col items-center pt-8">
+            <h2 className="text-4xl font-serif text-[#EEECE2] leading-tight mb-8">
+              Geleceğin Mimarisini <br /> Bugün İnşa Ediyoruz
             </h2>
-            <div className="h-px w-24 bg-arch-bg/30 mx-auto"></div>
-          </motion.div>
+            <div className="h-[1px] w-16 bg-[#EEECE2]/30 mx-auto"></div>
+          </div>
 
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* DESKTOP VERSION: Layered Stacking Cards */}
+      <section ref={ref} className="hidden md:block relative w-full bg-[#262827]">
+        {cards.map((card, i) => (
+          <VisionCard key={i} i={i} card={card} progress={scrollYProgress} cardsLength={cards.length} />
+        ))}
+      </section>
+    </>
+  );
+}
+
+// Extracted Component for Stacking Card Logic
+const VisionCard = ({ i, card, progress, cardsLength }: { i: number, card: any, progress: any, cardsLength: number }) => {
+  // Over a total height of cardsLength * 100vh, progress goes 0 to 1 over (cardsLength - 1) * 100vh of scrolling past top.
+  // The last card never scales down or gets covered.
+  const isLastCard = i === cardsLength - 1;
+  
+  // Calculate valid Framer Motion ranges (must be within [0, 1] and strictly increasing)
+  const range = isLastCard ? [0, 1] : [i * (1 / (cardsLength - 1)), (i + 1) * (1 / (cardsLength - 1))];
+  const scaleTarget = isLastCard ? [1, 1] : [1, 0.92];
+  const opacityTarget = isLastCard ? [0.3, 0.3] : [0.3, 0.8];
+
+  const scale = useTransform(progress, range, scaleTarget);
+  const opacity = useTransform(progress, range, opacityTarget);
+
+  return (
+    <div className="h-screen w-full sticky top-0 flex flex-col items-center justify-center overflow-hidden">
+      <motion.div 
+        style={{ scale }} 
+        className="w-full h-full relative origin-top bg-[#262827]"
+      >
+        <Image src={card.src} fill className="object-cover" alt={card.subtitle} />
+        {/* Parallax darkening overlay when card goes back */}
+        <motion.div style={{ opacity }} className="absolute inset-0 bg-black"></motion.div>
+        
+        {/* Text Area */}
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-12">
+          <PerspectiveReveal className="flex flex-col items-center">
+            <span className="text-[#EEECE2]/60 font-mono text-xs uppercase tracking-[0.3em] mb-4">{card.subtitle}</span>
+            <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-serif text-[#EEECE2] leading-[1.05] whitespace-pre-line tracking-tight drop-shadow-2xl">
+              {card.title}
+            </h2>
+          </PerspectiveReveal>
+          <div className="h-[1px] w-24 bg-[#EEECE2]/20 mt-12"></div>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 

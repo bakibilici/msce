@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { StaggerContainer, StaggerItem } from "@/components/Motion";
@@ -8,6 +9,11 @@ import { StaggerContainer, StaggerItem } from "@/components/Motion";
 export default function ProjectGallery({ images, title }: { images: string[], title: string }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Reset loading state when image index changes
   useEffect(() => {
@@ -73,12 +79,12 @@ export default function ProjectGallery({ images, title }: { images: string[], ti
       </StaggerContainer>
 
       <AnimatePresence>
-        {selectedIndex !== null && (
+        {selectedIndex !== null && mounted && createPortal(
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#262827]/95 backdrop-blur-md flex items-center justify-center px-4 md:px-12"
+            className="fixed inset-0 z-[100] bg-[#262827]/95 backdrop-blur-md flex items-center justify-center px-4 md:px-12"
             onClick={() => setSelectedIndex(null)}
           >
             {/* Close Button */}
@@ -149,7 +155,8 @@ export default function ProjectGallery({ images, title }: { images: string[], ti
                 {selectedIndex + 1} / {images.length}
               </div>
             </motion.div>
-          </motion.div>
+          </motion.div>,
+          document.body
         )}
       </AnimatePresence>
     </>
