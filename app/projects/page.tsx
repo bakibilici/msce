@@ -92,7 +92,7 @@ export default function Projects() {
                             <div className="h-[1px] w-6 bg-[#EEECE2]/30"></div>
                             <span className="text-[10px] font-mono uppercase tracking-widest text-[#EEECE2]/80">{project.category}</span>
                           </div>
-                          <h3 className="text-3xl md:text-4xl font-serif text-[#EEECE2] leading-[1.1] capitalize tracking-tight">{project.title.toLowerCase()}</h3>
+                          <h3 className="text-3xl md:text-4xl font-serif text-[#EEECE2] leading-[1.1] tracking-tight">{project.title}</h3>
                         </div>
                       </div>
 
@@ -108,7 +108,7 @@ export default function Projects() {
                         </div>
 
                         <div>
-                          <h3 className="text-3xl md:text-4xl font-medium mb-6 leading-tight tracking-tighter capitalize">{project.title.toLowerCase()}</h3>
+                          <h3 className="text-3xl md:text-4xl font-medium mb-6 leading-tight tracking-tighter">{project.title}</h3>
                           <div className="flex flex-wrap gap-x-12 gap-y-4 text-[10px] uppercase tracking-[0.2em] font-medium opacity-80">
                             <div className="flex flex-col gap-2">
                               <span className="text-[#EEECE2]/40">Lokasyon</span>
