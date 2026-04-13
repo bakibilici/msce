@@ -221,6 +221,9 @@ export default function Home() {
       {/* Bento Grid Section */}
       <BentoSection />
 
+      {/* Horizontal Story Section */}
+      <StorySection />
+
       {/* Call to Action */}
       <section className="relative py-16 md:py-32 px-6 md:px-12 border-t border-[#262827]/10 bg-[#262827]">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
@@ -1037,5 +1040,262 @@ function BentoSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+// ── Horizontal Scroll Story Section ────────────────────────────────
+function StorySection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const panels = [
+    {
+      year: "2017",
+      heading: "Bir Hayalle\nBa\u015flad\u0131k.",
+      desc: "İstanbul'da k\xFC\u00e7\xFCk bir ofiste, b\xFCy\xFCk bir vizyonla yola \u00e7\u0131kt\u0131k. M\xFCkemmeliyeti standart haline getirmek i\u00e7in.",
+      img: projects[1].images[1],
+      accent: "Kurulu\u015f",
+    },
+    {
+      year: "5",
+      heading: "Şehirden\n\u015eehire.",
+      desc: "\u0130stanbul, Yalova, Kocaeli, Bal\u0131kesir ve Ankara \u2014 T\xFCrkiye'nin d\xF6rt bir yan\u0131nda projeler \xFCretiyoruz.",
+      img: projects[4].images[0],
+      accent: "\u015eehir",
+      badges: ["\u0130stanbul", "Yalova", "Kocaeli", "Bal\u0131kesir", "Ankara"],
+    },
+    {
+      year: "25K+",
+      heading: "Metrekare\nHikaye.",
+      desc: "Her metrekare, titizlikle hesaplanm\u0131\u015f m\xFChendislik ve estetik anlay\u0131\u015f\u0131n\u0131n bir yans\u0131mas\u0131d\u0131r.",
+      img: projects[9].images[0],
+      accent: "m\xB2",
+    },
+    {
+      year: "17+",
+      heading: "Farkl\u0131 \xD6l\u00e7ek,\nAyn\u0131 \xD6zen.",
+      desc: "Villadan fabrikaya, hastaneden \xFCniversiteye \u2014 her \xF6l\u00e7ekte ayn\u0131 kalite standartlar\u0131n\u0131 uyguluyoruz.",
+      img: projects[5].images[0],
+      accent: "Proje",
+      badges: ["\u0130n\u015faat", "Cephe", "Mimari", "BIM"],
+    },
+    {
+      year: "\u221E",
+      heading: "Gelece\u011fi\nBirlikte.",
+      desc: "S\xFCrd\xFCr\xFClebilir, yenilik\u00e7i ve insan odakl\u0131 yap\u0131larla gelece\u011fin mimarisini bug\xFCnden \u015fekillendiriyoruz.",
+      img: projects[3].images[1],
+      accent: "Vizyon",
+    },
+  ];
+
+  const totalPanels = panels.length;
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${(totalPanels - 1) * 100}%`]);
+
+  return (
+    <>
+      {/* DESKTOP: Horizontal scroll */}
+      <section
+        ref={containerRef}
+        className="hidden md:block relative bg-[#1a1c1b]"
+        style={{ height: `${totalPanels * 100}vh` }}
+      >
+        <div className="sticky top-0 h-screen overflow-hidden">
+          {/* Progress bar */}
+          <motion.div
+            style={{ scaleX: scrollYProgress }}
+            className="absolute top-0 left-0 right-0 h-[2px] bg-[#EEECE2]/30 origin-left z-50"
+          />
+
+          {/* Section label */}
+          <div className="absolute top-8 left-12 z-40">
+            <span className="text-[10px] uppercase tracking-widest text-[#EEECE2]/30 font-mono">08 // Hikayemiz</span>
+          </div>
+
+          {/* Horizontal track */}
+          <motion.div
+            style={{ x }}
+            className="flex h-full"
+          >
+            {panels.map((panel, i) => (
+              <div key={i} className="relative w-screen h-screen flex-shrink-0 flex items-center justify-center overflow-hidden">
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={encodeURI(panel.img)}
+                    alt={panel.accent}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[#1a1c1b]/75" />
+                </div>
+
+                {/* Giant year/number watermark */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+                >
+                  <span className="text-[25vw] font-serif text-[#EEECE2]/[0.04] leading-none tracking-tighter">
+                    {panel.year}
+                  </span>
+                </motion.div>
+
+                {/* Content */}
+                <div className="relative z-10 max-w-4xl mx-auto px-12 flex flex-col md:flex-row items-center gap-16">
+                  {/* Left: Year pill + accent */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="flex flex-col items-center gap-4 flex-shrink-0"
+                  >
+                    <div className="w-24 h-24 rounded-full border border-[#EEECE2]/15 flex items-center justify-center">
+                      <span className="text-3xl font-serif text-[#EEECE2]">{panel.year}</span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-[#EEECE2]/40 font-mono">{panel.accent}</span>
+                  </motion.div>
+
+                  {/* Right: Text */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                  >
+                    <h3 className="text-4xl lg:text-6xl font-serif text-[#EEECE2] leading-[1.1] whitespace-pre-line tracking-tight mb-6">
+                      {panel.heading}
+                    </h3>
+                    <p className="text-[#EEECE2]/50 font-light leading-relaxed text-lg max-w-lg mb-6">
+                      {panel.desc}
+                    </p>
+                    {panel.badges && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                        className="flex flex-wrap gap-2"
+                      >
+                        {panel.badges.map((badge, bi) => (
+                          <span
+                            key={bi}
+                            className="px-4 py-1.5 rounded-full border border-[#EEECE2]/10 text-[#EEECE2]/50 text-[10px] uppercase tracking-[0.15em] font-medium"
+                          >
+                            {badge}
+                          </span>
+                        ))}
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
+
+                {/* Panel index */}
+                <div className="absolute bottom-12 right-12 z-20">
+                  <span className="text-[#EEECE2]/20 font-mono text-xs tracking-widest">
+                    {String(i + 1).padStart(2, "0")} / {String(totalPanels).padStart(2, "0")}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* MOBILE: Stacked vertical panels */}
+      <section className="md:hidden relative bg-[#1a1c1b]">
+        <div className="px-6 pt-20 pb-8">
+          <span className="text-[10px] uppercase tracking-widest text-[#EEECE2]/30 font-mono block mb-4">08 // Hikayemiz</span>
+          <h3 className="text-3xl font-serif text-[#EEECE2] leading-tight">Yolculuğumuz.</h3>
+        </div>
+        {panels.map((panel, i) => (
+          <div key={i} className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
+            {/* BG */}
+            <div className="absolute inset-0">
+              <Image src={encodeURI(panel.img)} alt={panel.accent} fill className="object-cover" />
+              <div className="absolute inset-0 bg-[#1a1c1b]/80" />
+            </div>
+
+            {/* Giant number */}
+            <motion.span
+              initial={{ opacity: 0, scale: 0.6 }}
+              whileInView={{ opacity: 0.04, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.2 }}
+              className="absolute inset-0 flex items-center justify-center text-[40vw] font-serif text-[#EEECE2] leading-none tracking-tighter pointer-events-none select-none"
+            >
+              {panel.year}
+            </motion.span>
+
+            {/* Content */}
+            <div className="relative z-10 px-6 py-16">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8 }}
+                className="flex items-center gap-4 mb-8"
+              >
+                <div className="w-16 h-16 rounded-full border border-[#EEECE2]/15 flex items-center justify-center flex-shrink-0">
+                  <span className="text-xl font-serif text-[#EEECE2]">{panel.year}</span>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#EEECE2]/40 font-mono">{panel.accent}</span>
+              </motion.div>
+
+              <motion.h3
+                initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-3xl font-serif text-[#EEECE2] leading-[1.15] whitespace-pre-line tracking-tight mb-5"
+              >
+                {panel.heading}
+              </motion.h3>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-[#EEECE2]/50 font-light leading-relaxed text-base max-w-sm mb-6"
+              >
+                {panel.desc}
+              </motion.p>
+
+              {panel.badges && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex flex-wrap gap-2"
+                >
+                  {panel.badges.map((badge, bi) => (
+                    <span
+                      key={bi}
+                      className="px-3 py-1 rounded-full border border-[#EEECE2]/10 text-[#EEECE2]/50 text-[10px] uppercase tracking-[0.15em]"
+                    >
+                      {badge}
+                    </span>
+                  ))}
+                </motion.div>
+              )}
+
+              {/* Panel counter */}
+              <div className="mt-10">
+                <span className="text-[#EEECE2]/15 font-mono text-xs tracking-widest">
+                  {String(i + 1).padStart(2, "0")} / {String(totalPanels).padStart(2, "0")}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+    </>
   );
 }
