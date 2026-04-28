@@ -81,20 +81,6 @@ export default function Navbar() {
               className={`object-contain transition-all duration-500 ${isScrolled ? 'h-16 md:h-20' : 'h-20 md:h-24'} w-auto`}
               priority
             />
-            <AnimatePresence>
-              {isAtTop && (
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}
-                  className={`text-3xl md:text-5xl font-semibold tracking-[0.15em] ${pathname === '/' ? 'text-[#EEECE2]' : 'text-[#262827]'
-                    }`}
-                >
-                  MSCE
-                </motion.span>
-              )}
-            </AnimatePresence>
           </Link>
 
           <button
