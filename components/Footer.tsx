@@ -8,18 +8,12 @@ export default function Footer() {
         <div className="md:col-span-2 flex flex-col items-start">
           <div className="flex items-center gap-4 flex-row">
             <Image
-              src="/mscelogo.png"
+              src="/mscelogo2.png"
               alt="MSCE Logo"
               width={100}
               height={30}
               className="object-contain h-12 w-auto mix-blend-multiply"
             />
-            <span
-              style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}
-              className={`text-lg md:text-xl font-semibold tracking-[0.15em]`}
-            >
-              MSCE
-            </span>
           </div>
 
           <p className="max-w-md text-sm leading-relaxed text-[#757776] mt-4">

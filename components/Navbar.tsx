@@ -74,7 +74,7 @@ export default function Navbar() {
           {/* Logo with MSCE Text */}
           <Link href="/" className="relative z-[60] flex items-center gap-2 md:gap-4">
             <Image
-              src="/mscelogo.png"
+              src="/mscelogo2.png"
               alt="MSCE Logo"
               width={240}
               height={240}
