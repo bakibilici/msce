@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="md:col-span-2 flex flex-col items-start">
           <div className="flex items-center gap-4 flex-row">
             <Image
-              src="/mscelogo2.png"
+              src="/mscelogo4.png"
               alt="MSCE Logo"
               width={100}
               height={30}

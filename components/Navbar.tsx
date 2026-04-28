@@ -74,11 +74,11 @@ export default function Navbar() {
           {/* Logo with MSCE Text */}
           <Link href="/" className="relative z-[60] flex items-center gap-2 md:gap-4">
             <Image
-              src="/mscelogo2.png"
+              src="/mscelogo4.png"
               alt="MSCE Logo"
-              width={240}
-              height={240}
-              className={`object-contain transition-all duration-500 ${isScrolled ? 'h-16 md:h-20' : 'h-20 md:h-24'} w-auto`}
+              width={300}
+              height={260}
+              className={`object-contain transition-all duration-500 ${isScrolled ? 'h-20 md:h-24' : 'h-24 md:h-28'} w-auto`}
               priority
             />
           </Link>
